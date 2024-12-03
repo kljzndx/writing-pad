@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="normalize.css">
+    <style>
+        #root{
+            width: min-content;
+            margin: 0 auto;
+}
+        #canvas{
+            border: 0.1rem solid #000;
+        }
+    </style>
     <title>手写板</title>
 </head>
 <body>
-    
+    <div id="root">
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <p id="info"></p>
+    </div>
+
+    <script>
+        let isPressing = false;
+
+        const info = document.querySelector('#info');
+        const canvas = document.querySelector('#canvas');
+        
+        canvas.addEventListener('pointerdown', (e)=>{
+            isPressing = true;
+        })
+        canvas.addEventListener('pointerup', (e)=>{
+            isPressing = false;
+        })
+        canvas.addEventListener('pointermove', (e)=>{
+            if(isPressing){
+                info.innerHTML = `x: ${e.offsetX.toFixed(2)}, y: ${e.offsetY.toFixed(2)}`;
+            }
+        })
+    </script>
 </body>
 </html>
