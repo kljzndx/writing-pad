@@ -18,6 +18,9 @@
 <body>
     <div id="root">
         <canvas id="canvas" width="500" height="200"></canvas>
+        <div>
+            <button onclick="drawText()">绘制文字</button>
+        </div>
     </div>
 
     <script>
@@ -49,6 +52,13 @@
             ctx.strokeStyle = 'black';
             ctx.lineWidth = 5;
             ctx.stroke();
+        }
+
+        function drawText(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = 'bold 100px sens-serif';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillText('Hello', 10, 100);
         }
     </script>
 </body>
