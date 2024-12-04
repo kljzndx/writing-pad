@@ -12,6 +12,9 @@
         #canvas{
             border: 0.1rem solid #000;
         }
+        #input_text{
+            width: 5rem;
+        }
     </style>
     <title>手写板</title>
 </head>
@@ -19,11 +22,30 @@
     <div id="root">
         <canvas id="canvas" width="500" height="200"></canvas>
         <div>
-            <button onclick="drawText()">绘制文字</button>
+            <label>
+                文字：
+                <input type="text" id="input_text"></input>
+            </label>
+            <label>
+                字体：
+                <input type="text" id="input_font" value="bold 100px sens-serif"></input>
+            </label>
+        </div>
+        <div>
+            <span>绘制模式：</span>
+            <label>
+                <input type="radio" name="write" id="radio_line" checked onclick="writingMode='line'">
+                线
+            </label>
+            <label>
+                <input type="radio" name="write" id="radio_text" onclick="writingMode='text'">
+                文字
+            </label>
         </div>
     </div>
 
     <script>
+        let writingMode = 'line';
         let isPressing = false;
         let lastX = 0;
         let lastY = 0;
@@ -37,10 +59,16 @@
         })
         canvas.addEventListener('pointerup', (e)=>{
             isPressing = false;
+
+            if(writingMode==='text'){
+                drawText(e.offsetX, e.offsetY);
+            }
         })
         canvas.addEventListener('pointermove', (e)=>{
             if(isPressing){
-                drawLine(lastX, lastY, e.offsetX, e.offsetY);
+                if (writingMode === 'line')
+                    drawLine(lastX, lastY, e.offsetX, e.offsetY);
+
                 [lastX, lastY] = [e.offsetX, e.offsetY];
             }
         })
@@ -54,11 +82,14 @@
             ctx.stroke();
         }
 
-        function drawText(){
+        function drawText(x, y){
+            const text = document.querySelector('#input_text').value;
+            const font = document.querySelector('#input_font').value;
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.font = 'bold 100px sens-serif';
+            ctx.font = font;
             ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
-            ctx.fillText('Hello', 10, 100);
+            ctx.fillText(text, x, y);
         }
     </script>
 </body>
