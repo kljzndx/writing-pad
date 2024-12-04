@@ -18,7 +18,6 @@
 <body>
     <div id="root">
         <canvas id="canvas" width="500" height="200"></canvas>
-        <p id="info"></p>
     </div>
 
     <script>
@@ -26,7 +25,6 @@
         let lastX = 0;
         let lastY = 0;
 
-        const info = document.querySelector('#info');
         const canvas = document.querySelector('#canvas');
         const ctx = canvas.getContext('2d');
         
@@ -41,7 +39,6 @@
             if(isPressing){
                 drawLine(lastX, lastY, e.offsetX, e.offsetY);
                 [lastX, lastY] = [e.offsetX, e.offsetY];
-                info.innerHTML = `x: ${e.offsetX.toFixed(2)}, y: ${e.offsetY.toFixed(2)}`;
             }
         })
 
