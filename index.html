@@ -32,6 +32,12 @@
             </label>
         </div>
         <div>
+            <label>
+                线段宽度：
+                <input type="number" id="input_lineWidth" value="5">
+            </label>
+        </div>
+        <div>
             <span>绘制模式：</span>
             <label>
                 <input type="radio" name="write" id="radio_line" checked onclick="writingMode='line'">
@@ -79,7 +85,7 @@
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
             ctx.strokeStyle = 'black';
-            ctx.lineWidth = 5;
+            ctx.lineWidth = document.querySelector('#input_lineWidth').value;
             ctx.stroke();
         }
 
