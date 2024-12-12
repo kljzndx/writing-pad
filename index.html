@@ -11,6 +11,7 @@
         }
         #canvas{
             border: 0.1rem solid #000;
+            touch-action: none;
         }
         #input_text{
             width: 5rem;
@@ -75,8 +76,6 @@
         const ctx = canvas.getContext('2d');
         
         canvas.addEventListener('pointerdown', (e)=>{
-            e.preventDefault();
-            
             isPressing = true;
             [lastX, lastY] = [e.offsetX, e.offsetY];
         })
