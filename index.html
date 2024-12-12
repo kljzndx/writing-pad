@@ -75,6 +75,8 @@
         const ctx = canvas.getContext('2d');
         
         canvas.addEventListener('pointerdown', (e)=>{
+            e.preventDefault();
+            
             isPressing = true;
             [lastX, lastY] = [e.offsetX, e.offsetY];
         })
